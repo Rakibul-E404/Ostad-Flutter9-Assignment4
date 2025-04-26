@@ -5,6 +5,8 @@ import 'package:ostad_flutter9_assignment4/views/auth/registration_screen.dart';
 import 'package:ostad_flutter9_assignment4/views/auth/recovery_screens/verify_email.dart';
 import 'package:ostad_flutter9_assignment4/widgets/custom_textfield.dart';
 
+import '../home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -16,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
 
+
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
 
@@ -25,6 +28,12 @@ class _LoginScreenState extends State<LoginScreen> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
+
+      
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => HomeScreen()),
+      );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Login failed: ${e.toString()}')),
@@ -33,6 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() => _isLoading = false);
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
